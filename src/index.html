@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Electron SQLite Example</title>
+  </head>
+  <body>
+    <ul id="list"></ul>
+    <script>
+      const electron = require("electron");
+      const ipcRenderer = electron.ipcRenderer;
+
+      // Listen for the "rows" event and display the results
+      ipcRenderer.on("rows", function (event, rows) {
+        const list = document.getElementById("list");
+        rows.forEach(function (row) {
+          const li = document.createElement("li");
+          li.textContent = row.name;
+          list.appendChild(li);
+        });
+      });
+    </script>
+  </body>
+</html>
